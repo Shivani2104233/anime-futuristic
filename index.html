@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Anime Futuristic — Tender Hub</title>
+
+  <!-- Fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/1b7b2f5b7c.js" crossorigin="anonymous"></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.1/ScrollTrigger.min.js"></script>
+
+  <!-- Particles (tsParticles) for more control than particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-engine"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- animated background layers -->
+  <div id="bg-layer" aria-hidden="true">
+    <canvas id="nebula"></canvas>
+    <div class="glow-wave"></div>
+    <div class="floating-orbs" aria-hidden="true"></div>
+  </div>
+
+  <!-- custom cursor -->
+  <div id="fancy-cursor" class="cursor"></div>
+
+  <header class="top">
+    <div class="logo">
+      <div class="logo-icon">⟠</div>
+      <div>
+        <h1>Anime Futuristic — Tender Hub</h1>
+        <small class="muted">soft neon • motion • responsive</small>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input id="searchInput" placeholder="Search tenders, org, id..." autocomplete="off"/>
+      <select id="statusFilter">
+        <option value="All">All statuses</option>
+        <option>Submitted</option>
+        <option>Pending</option>
+        <option>Missing Docs</option>
+        <option>Draft</option>
+        <option>Awarded</option>
+      </select>
+      <button id="newTenderBtn" class="btn primary"><i class="fa-solid fa-plus"></i> Add</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <h2 class="hero-title">TENDER LIST</h2>
+      <p class="hero-sub">Animated, filterable, and delightful — hover rows to see micro-interactions.</p>
+    </section>
+
+    <section class="dashboard">
+      <div class="stats">
+        <div class="stat">
+          <div class="num" id="totalTenders">0</div>
+          <div class="label">Total</div>
+        </div>
+        <div class="stat">
+          <div class="num" id="submittedCount">0</div>
+          <div class="label">Submitted</div>
+        </div>
+        <div class="stat">
+          <div class="num" id="pendingCount">0</div>
+          <div class="label">Pending</div>
+        </div>
+        <div class="stat">
+          <div class="num" id="awardCount">0</div>
+          <div class="label">Awarded</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="tenders-table" aria-live="polite">
+          <thead>
+            <tr>
+              <th>Tender</th>
+              <th>Status</th>
+              <th>Value (₹)</th>
+              <th>Deadline</th>
+              <th>Org</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tenderBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Designed with ✦ anime-futuristic motion</small>
+    <small id="buildTime"></small>
+  </footer>
+
+  <!-- Modal: Add/Edit -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h3 id="modalTitle">Add Tender</h3>
+      <form id="tenderForm" autocomplete="off">
+        <div class="grid">
+          <label>ID <input name="id" required placeholder="T001"></label>
+          <label>Name <input name="name" required placeholder="Tender name..."></label>
+          <label>Org <input name="org" placeholder="Organization"></label>
+          <label>Status
+            <select name="status">
+              <option>Submitted</option><option>Pending</option><option>Missing Docs</option><option>Draft</option><option>Awarded</option>
+            </select>
+          </label>
+          <label>Value (₹) <input name="value" type="number" required></label>
+          <label>Deadline <input name="deadline" type="date"></label>
+          <label>Note <textarea name="note" rows="2"></textarea></label>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="cancelBtn" class="btn">Cancel</button>
+          <button type="submit" class="btn primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- data + behavior -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
